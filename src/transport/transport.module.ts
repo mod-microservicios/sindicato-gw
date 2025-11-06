@@ -1,14 +1,29 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ConfigService } from '@nestjs/config';
 
-const clientsModule = ClientsModule.register([
+const clientsModule = ClientsModule.registerAsync([
   {
     name: 'MS_AUTH',
-    transport: Transport.TCP,
-    options: {
-      host: '127.0.0.1',
-      port: 3001,
-    },
+    useFactory: (configService: ConfigService) => ({
+      transport: Transport.TCP,
+      options: {
+        host: configService.get<string>('MS_AUTH_HOST', '127.0.0.1'),
+        port: configService.get<number>('MS_AUTH_PORT', 3001),
+      },
+    }),
+    inject: [ConfigService],
+  },
+  {
+    name: 'MS_ACTIVOS',
+    useFactory: (configService: ConfigService) => ({
+      transport: Transport.TCP,
+      options: {
+        host: configService.get<string>('MS_ACTIVOS_HOST', '127.0.0.1'),
+        port: configService.get<number>('MS_ACTIVOS_PORT', 3002),
+      },
+    }),
+    inject: [ConfigService],
   },
 ]);
 
