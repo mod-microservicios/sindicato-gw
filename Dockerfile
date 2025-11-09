@@ -1,5 +1,5 @@
 # Dockerfile para sindicato-gw
-FROM node:20-alpine AS builder
+FROM node:22.18.0-alpine AS builder
 
 WORKDIR /app
 
@@ -18,7 +18,7 @@ COPY . .
 RUN npm run build
 
 # Etapa de producción
-FROM node:20-alpine AS production
+FROM node:22.18.0-alpine AS production
 
 WORKDIR /app
 
