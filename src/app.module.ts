@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TransportModule } from './transport/transport.module';
 import { LoginModule } from './apps/login/login.module';
 import { UserModule } from './apps/auth-ms/user/user.module';
+import { VehiculosModule } from './apps/activos-ms/vehiculos/vehiculos.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { UserModule } from './apps/auth-ms/user/user.module';
     TransportModule,
     LoginModule,
     UserModule,
+    VehiculosModule,
   ],
   controllers: [AppController],
   providers: [AppService],
